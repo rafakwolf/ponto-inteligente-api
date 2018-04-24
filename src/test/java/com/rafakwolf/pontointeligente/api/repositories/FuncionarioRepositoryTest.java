@@ -30,6 +30,7 @@ public class FuncionarioRepositoryTest {
     private static final String EMAIL = "teste@teste.com.br";
     private static final String CPF = "00945088725";
 
+    @SuppressWarnings("RedundantThrows")
     @Before
     public void setUp() throws Exception {
         Empresa empresa = this.empresaRepository.save(obterDadosEmpresa());
@@ -37,7 +38,7 @@ public class FuncionarioRepositoryTest {
     }
 
     @After
-    public void tearDown(){
+    public void tearDown() {
         this.empresaRepository.deleteAll();
     }
 
@@ -60,31 +61,31 @@ public class FuncionarioRepositoryTest {
     }
 
     @Test
-    public void testandoBuscaFuncionarioPorEmail(){
+    public void testandoBuscaFuncionarioPorEmail() {
         Funcionario funcionario = funcionarioRepository.findByEmail(EMAIL);
         assertEquals(EMAIL, funcionario.getEmail());
     }
 
     @Test
-    public void testandoBuscaFuncionarioPorCpf(){
+    public void testandoBuscaFuncionarioPorCpf() {
         Funcionario funcionario = funcionarioRepository.findByCpf(CPF);
         assertEquals(CPF, funcionario.getCpf());
     }
 
     @Test
-    public void testandoBuscaFuncionarioPorEmailECpf(){
+    public void testandoBuscaFuncionarioPorEmailECpf() {
         Funcionario funcionario = funcionarioRepository.findByCpfOrEmail(CPF, EMAIL);
         assertNotNull(funcionario);
     }
 
     @Test
-    public void testandoBuscaFuncionarioPorEmailOuCpfComEmailInvalido(){
+    public void testandoBuscaFuncionarioPorEmailOuCpfComEmailInvalido() {
         Funcionario funcionario = funcionarioRepository.findByCpfOrEmail(CPF, "email@invalido.com");
         assertNotNull(funcionario);
     }
 
     @Test
-    public void testandoBuscaFuncionarioPorEmailOuCpfComCpfInvalido(){
+    public void testandoBuscaFuncionarioPorEmailOuCpfComCpfInvalido() {
         Funcionario funcionario = funcionarioRepository.findByCpfOrEmail("0123456789", EMAIL);
         assertNotNull(funcionario);
     }

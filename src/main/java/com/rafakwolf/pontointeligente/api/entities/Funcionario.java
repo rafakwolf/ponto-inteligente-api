@@ -179,4 +179,13 @@ public class Funcionario implements Serializable {
 		dataCriacao = agora;
 		dataAtualizacao = agora;
 	}
+
+	@Override
+	public String toString() {
+		return "Funcionario{" +
+				"id=" + id +
+				", nome='" + nome + '\'' +
+				", email='" + email + '\'' +
+				'}';
+	}
 }

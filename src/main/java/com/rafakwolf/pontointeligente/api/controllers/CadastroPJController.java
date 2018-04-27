@@ -13,10 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.NoSuchAlgorithmException;
@@ -36,6 +33,7 @@ public class CadastroPJController {
         this.empresaService = empresaService;
     }
 
+    @PostMapping
     public ResponseEntity<Response<CadastroPJDto>> cadastrar(@Valid @RequestBody CadastroPJDto cadastroPJDto,
                                                              BindingResult result) throws NoSuchAlgorithmException {
         log.info("Cadastrando PJ: {}", cadastroPJDto.toString());
@@ -60,15 +58,15 @@ public class CadastroPJController {
         return ResponseEntity.ok(response);
     }
 
-    private void validarDadosExistentes(CadastroPJDto cadastroPJDto, BindingResult result) {
+    private void validarDadosExistentes(CadastroPJDto cadastroPJDto, BindingResult bindingResult) {
         this.empresaService.buscarPorCnpj(cadastroPJDto.getCnpj())
-                .ifPresent(emp -> result.addError(new ObjectError("empresa", "Empresa já existente.")));
+                .ifPresent(emp -> bindingResult.addError(new ObjectError("empresa", "Empresa já existente.")));
 
         this.funcionarioService.buscarPorCpf(cadastroPJDto.getCpf())
-                .ifPresent(func -> result.addError(new ObjectError("funcionario", "CPF já existente.")));
+                .ifPresent(func -> bindingResult.addError(new ObjectError("funcionario", "CPF já existente.")));
 
         this.funcionarioService.buscarPorEmail(cadastroPJDto.getEmail())
-                .ifPresent(func -> result.addError(new ObjectError("funcionario", "Email já existente.")));
+                .ifPresent(func -> bindingResult.addError(new ObjectError("funcionario", "Email já existente.")));
     }
 
     private Empresa converterDtoParaEmpresa(CadastroPJDto cadastroPJDto) {

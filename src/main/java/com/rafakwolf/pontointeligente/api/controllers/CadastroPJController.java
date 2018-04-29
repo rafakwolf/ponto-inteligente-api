@@ -16,7 +16,6 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.security.NoSuchAlgorithmException;
 
 @RestController
 @RequestMapping("/api/cadastrar-pj")
@@ -35,7 +34,7 @@ public class CadastroPJController {
 
     @PostMapping
     public ResponseEntity<Response<CadastroPJDto>> cadastrar(@Valid @RequestBody CadastroPJDto cadastroPJDto,
-                                                             BindingResult result) throws NoSuchAlgorithmException {
+                                                             BindingResult result) {
         log.info("Cadastrando PJ: {}", cadastroPJDto.toString());
         Response<CadastroPJDto> response = new Response<>();
 
@@ -77,8 +76,7 @@ public class CadastroPJController {
         return empresa;
     }
 
-    private Funcionario converterDtoParaFuncionario(CadastroPJDto cadastroPJDto)
-            throws NoSuchAlgorithmException {
+    private Funcionario converterDtoParaFuncionario(CadastroPJDto cadastroPJDto) {
         Funcionario funcionario = new Funcionario();
         funcionario.setNome(cadastroPJDto.getNome());
         funcionario.setEmail(cadastroPJDto.getEmail());

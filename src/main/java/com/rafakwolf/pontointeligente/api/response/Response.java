@@ -25,7 +25,7 @@ public class Response<T> {
 
     public List<String> getErrors() {
         if (this.errors == null)
-            return new ArrayList<>();
+            this.errors = new ArrayList<>();
         return errors;
     }
 }

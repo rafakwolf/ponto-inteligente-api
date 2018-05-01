@@ -12,7 +12,7 @@ import com.rafakwolf.pontointeligente.api.entities.Funcionario;
 import com.rafakwolf.pontointeligente.api.security.JwtUserFactory;
 import com.rafakwolf.pontointeligente.api.services.FuncionarioService;
 
-@Service
+@Service("userDetailsService")
 public class JwtUserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired

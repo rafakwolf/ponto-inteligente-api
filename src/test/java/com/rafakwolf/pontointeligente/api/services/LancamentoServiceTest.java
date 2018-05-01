@@ -2,7 +2,6 @@ package com.rafakwolf.pontointeligente.api.services;
 
 import com.rafakwolf.pontointeligente.api.entities.Lancamento;
 import com.rafakwolf.pontointeligente.api.repositories.LancamentoRepository;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +19,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
 import java.util.Optional;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

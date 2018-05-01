@@ -67,10 +67,12 @@ public class CadastroPFController {
         }
 
         this.funcionarioService.buscarPorCpf(cadastroPFDto.getCpf())
-                .ifPresent(func -> result.addError(new ObjectError("funcionario", "CPF já existente.")));
+                .ifPresent(func -> result.addError(
+                        new ObjectError("funcionario", "CPF já existente.")));
 
         this.funcionarioService.buscarPorEmail(cadastroPFDto.getEmail())
-                .ifPresent(func -> result.addError(new ObjectError("funcionario", "Email já existente.")));
+                .ifPresent(func -> result.addError(
+                        new ObjectError("funcionario", "Email já existente.")));
     }
 
     private Funcionario converterDtoParaFuncionario(CadastroPFDto cadastroPFDto) {

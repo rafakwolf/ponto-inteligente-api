@@ -46,17 +46,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public JwtAuthenticationTokenFilter authenticationTokenFilterBean() throws Exception {
+    public JwtAuthenticationTokenFilter authenticationTokenFilterBean() {
         return new JwtAuthenticationTokenFilter();
     }
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.csrf().disable().exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeRequests()
+        httpSecurity.csrf().disable().exceptionHandling()
+                .authenticationEntryPoint(unauthorizedHandler)
+                .and().sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().authorizeRequests()
                 .antMatchers("/auth/**", "/api/cadastrar-pj", "/api/cadastrar-pf", "/v2/api-docs",
                         "/swagger-resources/**", "/configuration/security", "/swagger-ui.html", "/webjars/**")
                 .permitAll().anyRequest().authenticated();
+
         httpSecurity.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
         httpSecurity.headers().cacheControl();
     }

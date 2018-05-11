@@ -16,6 +16,10 @@
 *.iml
 *.ipr
 
+### Gradle ###
+.gradle
+build/
+
 ### NetBeans ###
 /nbproject/private/
 /build/
@@ -23,3 +27,6 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+
+# Windows thumbnail db
+Thumbs.db

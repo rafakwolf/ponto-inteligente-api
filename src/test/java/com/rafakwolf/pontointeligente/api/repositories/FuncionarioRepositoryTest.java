@@ -30,7 +30,6 @@ public class FuncionarioRepositoryTest {
     private static final String EMAIL = "teste@teste.com.br";
     private static final String CPF = "00945088725";
 
-    @SuppressWarnings("RedundantThrows")
     @Before
     public void setUp() throws Exception {
         Empresa empresa = this.empresaRepository.save(obterDadosEmpresa());
